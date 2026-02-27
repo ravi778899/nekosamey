@@ -44,7 +44,7 @@ button {
    cursor: pointer;
 }
 .yes { background: #ff4d6d; color: white; }
-.no { background: gray; color: white; }
+.no { background: gray; color: white; position: relative; }
 .heart {
    position: fixed;
    color: red;
@@ -61,14 +61,14 @@ button {
 <h1 id="message"></h1>
 <div class="glow">I Love You Srav ❤️</div>
 <button class="yes" onclick="yes()">Yes 💖</button>
-<button class="no" onclick="no()">No 😅</button>
+<button class="no" onmouseover="moveButton(this)" onclick="no()">No 😅</button>
 <audio autoplay loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
 </audio>
 <script>
 const params = new URLSearchParams(window.location.search);
-const name = params.get("name") || "Someone";
-const valentineName = params.get("valentineName") || "Beautiful";
+const name = params.get("name") || "Ravi";
+const valentineName = params.get("valentineName") || "Srav";
 document.getElementById("message").innerHTML =
 "Hey " + valentineName + " ❤️<br><br>Will you be my Valentine, " + name + "?";
 // Floating hearts
@@ -85,15 +85,33 @@ setInterval(createHeart, 500);
 // YES surprise
 function yes(){
    document.body.innerHTML = `
-<h1 class="glow" style="margin-top:200px;">
+<h1 class="glow" style="margin-top:150px;">
        YAYYYYY 💕<br><br>
-       I Love You Forever Srav ❤️
+       I Love You Forever ${valentineName} ❤️<br><br>
+       You are mine forever 😘
 </h1>
    `;
 }
-// NO response
+// Random funny NO messages
 function no(){
-   alert("Are you sure? 🥺 Try again 😅");
+   const messages = [
+       "Are you sure? 🥺",
+       "Think again 😏",
+       "Wrong button madam 😜",
+       "System error… Only YES allowed 😂",
+       "My heart is fragile 💔",
+       "Don’t break my heart 😭",
+       "Try pressing YES instead 😌",
+       "Loading… YES is better 😎"
+   ];
+   const random = Math.floor(Math.random() * messages.length);
+   alert(messages[random]);
+}
+// NO button runs away
+function moveButton(btn){
+   btn.style.position = "absolute";
+   btn.style.left = Math.random() * 80 + "vw";
+   btn.style.top = Math.random() * 80 + "vh";
 }
 </script>
 </body>
