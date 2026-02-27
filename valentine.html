@@ -8,43 +8,44 @@ body {
    padding: 0;
    text-align: center;
    font-family: Arial;
-   background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+   background: linear-gradient(45deg, #ff758c, #ff7eb3);
    overflow: hidden;
 }
+/* BIGGER IMAGE */
 img {
-   width: 220px;
-   height: 220px;
+   width: 300px;
+   height: 300px;
    object-fit: cover;
    border-radius: 50%;
-   margin-top: 60px;
-   box-shadow: 0 0 25px pink;
-   border: 5px solid white;
+   margin-top: 50px;
+   box-shadow: 0 0 30px pink;
+   border: 6px solid white;
 }
+/* BIGGER TEXT */
 h1 {
    margin-top: 20px;
    color: white;
-   font-size: 28px;
-   text-shadow: 0 0 10px red, 0 0 20px hotpink;
+   font-size: 36px;
 }
 .glow {
-   font-size: 35px;
+   font-size: 45px;
    color: #fff;
    animation: glow 1s infinite alternate;
 }
 @keyframes glow {
    from { text-shadow: 0 0 10px #ff4da6; }
-   to { text-shadow: 0 0 30px #ff0066; }
+   to { text-shadow: 0 0 35px #ff0066; }
 }
 button {
-   padding: 12px 25px;
-   font-size: 18px;
-   margin: 15px;
-   border-radius: 30px;
+   padding: 15px 35px;
+   font-size: 22px;
+   margin: 20px;
+   border-radius: 40px;
    border: none;
    cursor: pointer;
 }
-.yes { background: #ff4d6d; color: white; }
-.no { background: gray; color: white; position: relative; }
+.yes { background: #ff1744; color: white; }
+.no { background: gray; color: white; }
 .heart {
    position: fixed;
    color: red;
@@ -61,8 +62,11 @@ button {
 <h1 id="message"></h1>
 <div class="glow">I Love You Srav ❤️</div>
 <button class="yes" onclick="yes()">Yes 💖</button>
-<button class="no" onmouseover="moveButton(this)" onclick="no()">No 😅</button>
-<audio autoplay loop>
+<button class="no" onclick="no()" onmouseover="moveButton(this)">No 😅</button>
+<!-- Music button (Autoplay often blocked by browser) -->
+<br><br>
+<button onclick="playMusic()">Play Music 🎵</button>
+<audio id="bgMusic" loop>
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
 </audio>
 <script>
@@ -71,47 +75,49 @@ const name = params.get("name") || "Ravi";
 const valentineName = params.get("valentineName") || "Srav";
 document.getElementById("message").innerHTML =
 "Hey " + valentineName + " ❤️<br><br>Will you be my Valentine, " + name + "?";
-// Floating hearts
+/* Floating hearts */
 function createHeart() {
    const heart = document.createElement("div");
    heart.classList.add("heart");
    heart.innerHTML = "❤️";
    heart.style.left = Math.random() * 100 + "vw";
-   heart.style.fontSize = Math.random() * 20 + 20 + "px";
+   heart.style.fontSize = Math.random() * 20 + 25 + "px";
    document.body.appendChild(heart);
    setTimeout(() => heart.remove(), 5000);
 }
 setInterval(createHeart, 500);
-// YES surprise
+/* YES Surprise */
 function yes(){
    document.body.innerHTML = `
-<h1 class="glow" style="margin-top:150px;">
+<h1 class="glow" style="margin-top:200px;">
        YAYYYYY 💕<br><br>
        I Love You Forever ${valentineName} ❤️<br><br>
-       You are mine forever 😘
+       You Are My World 🌎💖
 </h1>
    `;
 }
-// Random funny NO messages
+/* NO Funny Messages */
 function no(){
    const messages = [
        "Are you sure? 🥺",
-       "Think again 😏",
-       "Wrong button madam 😜",
-       "System error… Only YES allowed 😂",
-       "My heart is fragile 💔",
-       "Don’t break my heart 😭",
-       "Try pressing YES instead 😌",
-       "Loading… YES is better 😎"
+       "Wrong button 😜",
+       "Try YES instead 😂",
+       "My heart is breaking 💔",
+       "Think again madam 😏",
+       "Only YES works here 😎"
    ];
    const random = Math.floor(Math.random() * messages.length);
    alert(messages[random]);
 }
-// NO button runs away
+/* NO Button runs */
 function moveButton(btn){
    btn.style.position = "absolute";
    btn.style.left = Math.random() * 80 + "vw";
    btn.style.top = Math.random() * 80 + "vh";
+}
+/* Music play (manual click needed) */
+function playMusic(){
+   document.getElementById("bgMusic").play();
 }
 </script>
 </body>
